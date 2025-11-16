@@ -2,1650 +2,1240 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Aiaxcart Premium – Price Catalog</title>
+  <title>Aiaxcart Premium – Catalog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
     :root {
       --primary: #ffb0b5;
       --secondary: #ffd3d6;
-      --light: #fff8f6;
-      --text: #4a3a35;
+      --bg: #fff7f8;
+      --text: #3a2f2e;
+      --card-bg: #ffffff;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--light);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top, #ffe0e4 0, #fff7f8 45%, #ffffff 100%);
       color: var(--text);
+      padding: 20px 16px 40px;
     }
 
-    header {
-      background: var(--secondary);
-      padding: 1rem 1.25rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .header-inner {
+    .page-container {
       max-width: 1100px;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .logo span:last-child {
-      font-weight: 600;
-    }
-
-    .badge-env {
-      font-size: 0.8rem;
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 1.5rem auto 2.5rem;
-      padding: 0 1.25rem;
     }
 
     h1 {
-      font-size: 1.6rem;
-      margin-bottom: 0.25rem;
+      text-align: center;
+      margin: 0 0 6px;
+      font-size: 1.9rem;
     }
 
-    .hint {
+    .subtitle {
+      text-align: center;
       font-size: 0.9rem;
-      color: #7a6660;
-      margin-bottom: 1rem;
+      color: #6e5a57;
+      margin-bottom: 18px;
     }
 
-    /* Category filter buttons */
-    .filters {
+    /* Top controls */
+    .top-controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .filter-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 0.35rem 0.9rem;
-      font-size: 0.9rem;
-      background: #fff;
-      color: var(--text);
-      cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
-
-    .filter-btn.active {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    /* Product cards */
-    .product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    details.product-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 0.6rem 0.9rem;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.04);
-    }
-
-    summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
+      gap: 10px;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      margin-bottom: 18px;
     }
 
-    summary::-webkit-details-marker { display: none; }
+    .search-wrap {
+      flex: 1 1 180px;
+      max-width: 260px;
+    }
 
-    .prod-main {
+    .search-input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid #e3c6c9;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px #ffdfe4;
+    }
+
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+      flex: 1 1 260px;
+    }
+
+    .cat-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.9);
+      color: #6e5a57;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      transition: 0.15s;
+      white-space: nowrap;
+    }
+
+    .cat-btn.active,
+    .cat-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 20px 2px 10px;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      flex: 1;
-      min-width: 0;
+      gap: 6px;
     }
 
-    .prod-icon {
-      font-size: 1.4rem;
+    .category-title span.icon {
+      font-size: 1.2rem;
     }
 
-    .prod-title {
-      font-size: 1rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
     }
 
-    .prod-sub {
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 10px 8px 12px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: 0.18s ease;
       font-size: 0.8rem;
-      color: #8a746e;
     }
 
-    .prod-tags {
+    .card:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 5px 16px rgba(0,0,0,0.12);
+    }
+
+    .card-icon {
+      font-size: 1.7rem;
+      margin-bottom: 4px;
+    }
+
+    .card-name {
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .card-tag {
+      margin-top: 3px;
+      font-size: 0.7rem;
+      color: #9a7f7a;
+    }
+
+    .no-results {
+      font-size: 0.9rem;
+      padding: 8px 0 16px;
+      color: #8a6b68;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 999;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      max-width: 520px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+      position: relative;
+      max-height: 90vh;
+      overflow: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      border: none;
+      background: transparent;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #ff7a8a;
+    }
+
+    .modal-header {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.25rem;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 6px;
     }
 
-    .tag {
-      font-size: 0.75rem;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      background: #ffeef0;
-      color: #7a4a4f;
+    .modal-icon {
+      font-size: 1.8rem;
     }
 
-    .chevron {
-      font-size: 0.9rem;
-      margin-left: 0.25rem;
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 700;
     }
 
-    .prod-body {
-      margin-top: 0.6rem;
-      border-top: 1px dashed #f0dddd;
-      padding-top: 0.6rem;
-      font-size: 0.9rem;
+    .modal-category {
+      font-size: 0.8rem;
+      color: #8a6b68;
+      margin-bottom: 8px;
     }
 
-    .pricing-group {
-      margin-bottom: 0.6rem;
+    .account-block {
+      border-radius: 12px;
+      background: #fff7f9;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      border: 1px solid #ffe0e7;
     }
 
-    .pricing-group h4 {
-      margin: 0 0 0.25rem;
+    .account-title {
       font-size: 0.9rem;
       font-weight: 600;
+      margin-bottom: 4px;
     }
 
-    .pricing-group ul {
-      margin: 0;
-      padding-left: 1.1rem;
-      list-style: disc;
-      font-size: 0.86rem;
+    .price-line {
+      font-size: 0.84rem;
     }
 
-    .pricing-group li {
-      margin-bottom: 0.2rem;
+    .price-line span.duration {
+      font-weight: 500;
     }
 
-    .note {
-      font-size: 0.8rem;
-      color: #9a827c;
-      margin-top: 0.2rem;
+    .price-line span.amount {
+      font-weight: 600;
+      color: #d4486e;
     }
 
     @media (max-width: 600px) {
-      summary {
-        flex-direction: column;
-        align-items: flex-start;
+      h1 {
+        font-size: 1.6rem;
       }
-      .prod-tags {
-        align-items: flex-start;
+      .modal-card {
+        padding: 16px;
       }
     }
   </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <span>🛒</span>
-      <span>Aiaxcart Premium – Price Catalog</span>
+  <div class="page-container">
+    <h1>🛒 Aiaxcart Premium – Catalog</h1>
+    <div class="subtitle">
+      Tap a product to see full pricing (account type + duration).
     </div>
-    <span class="badge-env">Live price list</span>
+
+    <div class="top-controls">
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search product name…"
+        />
+      </div>
+
+      <div class="category-filter">
+        <button class="cat-btn active" data-category="all">All</button>
+        <button class="cat-btn" data-category="entertainment">Entertainment</button>
+        <button class="cat-btn" data-category="streaming">Streaming</button>
+        <button class="cat-btn" data-category="ai">AI</button>
+        <button class="cat-btn" data-category="educational">Educational</button>
+        <button class="cat-btn" data-category="editing">Editing</button>
+      </div>
+    </div>
+
+    <div id="catalogRoot"></div>
   </div>
-</header>
 
-<main>
-  <h1>Premium Accounts Pricelist</h1>
-  <p class="hint">
-    Click a product to see full pricing (account type + duration). Use the filters to show a category only.
-  </p>
-
-  <!-- Category filters -->
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="entertainment">Entertainment</button>
-    <button class="filter-btn" data-filter="streaming">Music / Streaming</button>
-    <button class="filter-btn" data-filter="ai">AI Tools</button>
-    <button class="filter-btn" data-filter="educational">Educational</button>
-    <button class="filter-btn" data-filter="editing">Editing / Design</button>
+  <!-- Modal -->
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" id="modalIcon">🎟️</div>
+        <div>
+          <div class="modal-title" id="modalTitle"></div>
+        </div>
+      </div>
+      <div class="modal-category" id="modalCategory"></div>
+      <div id="modalBody"></div>
+    </div>
   </div>
 
-  <section class="product-list">
+  <script>
+    // ========= DATA: ALL PRODUCTS + PRICING =========
+    // duration text is already display-ready (no code mapping needed)
+    const PRODUCTS = [
+      // ===== Entertainment =====
+      {
+        id: "netflix",
+        name: "Netflix Premium",
+        icon: "📺",
+        category: "entertainment",
+        pricing: {
+          "Solo Profile": {
+            "1 month": 160,
+            "2 months": 280,
+            "3 months": 435,
+            "4 months": 565,
+            "6 months": 850,
+            "8 months": 1090,
+            "12 months": 1500
+          },
+          "Shared Profile": {
+            "1 month": 80,
+            "2 months": 145,
+            "3 months": 205,
+            "4 months": 270,
+            "6 months": 410,
+            "8 months": 520,
+            "12 months": 800
+          }
+        }
+      },
+      {
+        id: "viu",
+        name: "Viu Premium",
+        icon: "🎬",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 70,
+            "2 months": 105,
+            "3 months": 145,
+            "4 months": 170,
+            "6 months": 205,
+            "10 months": 280,
+            "12 months": 310
+          },
+          "Shared Account": {
+            "1 month": 30,
+            "2 months": 55,
+            "3 months": 75,
+            "4 months": 90,
+            "6 months": 120,
+            "10 months": 190,
+            "12 months": 220
+          }
+        }
+      },
+      {
+        id: "viva-max",
+        name: "VIVAMAX VIVAONE",
+        icon: "🎭",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 110,
+            "2 months": 145,
+            "3 months": 170
+          },
+          "Shared Account": {
+            "1 month": 65,
+            "2 months": 90,
+            "3 months": 120
+          }
+        }
+      },
+      {
+        id: "wetv",
+        name: "WeTV",
+        icon: "📱",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 150
+          },
+          "Shared Account": {
+            "1 month": 55,
+            "2 months": 95,
+            "3 months": 135
+          }
+        }
+      },
+      {
+        id: "iwant-tfc",
+        name: "IWANT TFC",
+        icon: "📺",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 145
+          },
+          "Shared Account": {
+            "1 month": 50,
+            "2 months": 90,
+            "3 months": 125
+          }
+        }
+      },
+      {
+        id: "crunchyroll",
+        name: "Crunchyroll",
+        icon: "🎮",
+        category: "entertainment",
+        pricing: {
+          "Solo Profile": {
+            "1 month": 75,
+            "2 months": 115,
+            "3 months": 160,
+            "4 months": 195
+          },
+          "Shared Profile": {
+            "1 month": 35,
+            "2 months": 60,
+            "3 months": 90,
+            "4 months": 115
+          }
+        }
+      },
+      {
+        id: "disney-plus",
+        name: "Disney+",
+        icon: "🦁",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 390
+          },
+          "Solo Profile": {
+            "1 month": 160,
+            "2 months": 315,
+            "4 months": 630,
+            "10 months": 1480,
+            "12 months": 1700
+          },
+          "Shared Profile": {
+            "1 month": 85,
+            "2 months": 165,
+            "4 months": 330,
+            "10 months": 720,
+            "12 months": 880
+          }
+        }
+      },
+      {
+        id: "bilibili",
+        name: "Bilibili",
+        icon: "📺",
+        category: "entertainment",
+        pricing: {
+          "Shared Account": {
+            "1 month": 45,
+            "2 months": 75,
+            "3 months": 105
+          }
+        }
+      },
+      {
+        id: "loklok",
+        name: "Loklok",
+        icon: "📱",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 150
+          },
+          "Shared Account": {
+            "1 month": 65,
+            "2 months": 115,
+            "3 months": 170
+          }
+        }
+      },
+      {
+        id: "iqiyi",
+        name: "iQiyi",
+        icon: "📺",
+        category: "entertainment",
+        pricing: {
+          "Shared Account": {
+            "1 month": 50,
+            "2 months": 90,
+            "3 months": 135
+          }
+        }
+      },
+      {
+        id: "hbo-max",
+        name: "HBO Max",
+        icon: "📹",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 240,
+            "2 months": 360,
+            "3 months": 480
+          },
+          "Solo Profile": {
+            "1 month": 135,
+            "2 months": 240,
+            "3 months": 350
+          },
+          "Shared Profile": {
+            "1 month": 70,
+            "2 months": 120,
+            "3 months": 170
+          }
+        }
+      },
+      {
+        id: "amazon-prime",
+        name: "Amazon Prime",
+        icon: "🛒",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 80,
+            "2 months": 110,
+            "3 months": 135,
+            "4 months": 160,
+            "5 months": 185,
+            "6 months": 210
+          },
+          "Solo Profile": {
+            "1 month": 50,
+            "2 months": 80,
+            "3 months": 110,
+            "4 months": 135,
+            "5 months": 150,
+            "6 months": 170
+          },
+          "Shared Profile": {
+            "1 month": 30,
+            "2 months": 50,
+            "3 months": 70,
+            "4 months": 80,
+            "5 months": 90,
+            "6 months": 100
+          }
+        }
+      },
+      {
+        id: "youku",
+        name: "Youku",
+        icon: "📺",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 125
+          },
+          "Shared Account": {
+            "1 month": 50,
+            "2 months": 90,
+            "3 months": 125
+          }
+        }
+      },
+      {
+        id: "nba-league-pass",
+        name: "NBA League Pass Premium",
+        icon: "🏀",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 150
+          },
+          "Shared Account": {
+            "1 month": 75
+          }
+        }
+      },
 
-    <!-- ============= ENTERTAINMENT ============= -->
+      // ===== Streaming (Music) =====
+      {
+        id: "youtube",
+        name: "YouTube Premium",
+        icon: "📹",
+        category: "streaming",
+        pricing: {
+          "Famhead": {
+            "1 month": 70,
+            "2 months": 90,
+            "3 months": 125,
+            "4 months": 150,
+            "5 months": 175,
+            "6 months": 200
+          },
+          "Solo": {
+            "1 month": 45,
+            "2 months": 60,
+            "3 months": 85,
+            "4 months": 105,
+            "5 months": 125,
+            "6 months": 145
+          },
+          "Invite": {
+            "1 month": 20,
+            "2 months": 35,
+            "3 months": 50,
+            "4 months": 60,
+            "5 months": 70,
+            "6 months": 80
+          }
+        }
+      },
+      {
+        id: "spotify",
+        name: "Spotify Premium",
+        icon: "🎵",
+        category: "streaming",
+        pricing: {
+          "Solo FW": {
+            "1 month": 60,
+            "2 months": 110,
+            "3 months": 150,
+            "4 months": 200
+          },
+          "Solo NW": {
+            "1 month": 45,
+            "2 months": 80,
+            "3 months": 120,
+            "4 months": 150
+          }
+        }
+      },
+      {
+        id: "apple-music",
+        name: "Apple Music",
+        icon: "🎧",
+        category: "streaming",
+        pricing: {
+          "Solo Account": {
+            "1 month": 49,
+            "2 months": 89,
+            "3 months": 129,
+            "4 months": 159
+          }
+        }
+      },
 
-    <details class="product-card" data-category="entertainment" open>
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📺</span>
-          <div>
-            <div class="prod-title">Netflix Premium</div>
-            <div class="prod-sub">ID: netflix • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">default stock: 15</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo profile</h4>
-          <ul>
-            <li>1 Month – ₱160</li>
-            <li>2 Months – ₱280</li>
-            <li>3 Months – ₱435</li>
-            <li>4 Months – ₱565</li>
-            <li>6 Months – ₱850</li>
-            <li>8 Months – ₱1090</li>
-            <li>12 Months – ₱1500</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared profile</h4>
-          <ul>
-            <li>1 Month – ₱80</li>
-            <li>2 Months – ₱145</li>
-            <li>3 Months – ₱205</li>
-            <li>4 Months – ₱270</li>
-            <li>6 Months – ₱410</li>
-            <li>8 Months – ₱520</li>
-            <li>12 Months – ₱800</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      // ===== AI Tools =====
+      {
+        id: "chatgpt-plus",
+        name: "ChatGPT Plus",
+        icon: "🧠",
+        category: "ai",
+        pricing: {
+          "Solo Account": {
+            "1 month": 600,
+            "2 months": 1050,
+            "3 months": 1500
+          },
+          "Shared Account": {
+            "1 month": 120,
+            "2 months": 200,
+            "3 months": 290
+          }
+        }
+      },
+      {
+        id: "chatgpt-go",
+        name: "ChatGPT Go",
+        icon: "🤖",
+        category: "ai",
+        pricing: {
+          "Shared Account": {
+            "1 month": 70,
+            "1 year": 300
+          },
+          "Solo Account": {
+            "1 month": 230,
+            "1 year": 750
+          }
+        }
+      },
+      {
+        id: "blackbox-ai",
+        name: "Blackbox AI",
+        icon: "🤖",
+        category: "ai",
+        pricing: {
+          "Solo Account": {
+            "1 month": 90,
+            "2 months": 170,
+            "3 months": 250
+          }
+        }
+      },
+      {
+        id: "perplexity",
+        name: "Perplexity AI",
+        icon: "🔍",
+        category: "ai",
+        pricing: {
+          "Solo Account": {
+            "1 month": 120,
+            "4 months": 200,
+            "6 months": 250,
+            "12 months": 300,
+            "24 months": 450
+          },
+          "Shared Account": {
+            "1 month": 55,
+            "4 months": 140,
+            "6 months": 190,
+            "12 months": 230,
+            "24 months": 350
+          }
+        }
+      },
+      {
+        id: "google-one",
+        name: "Google One + Gemini AI",
+        icon: "☁️",
+        category: "ai",
+        pricing: {
+          "Solo Account": {
+            "1 month": 50,
+            "2 months": 85,
+            "3 months": 120,
+            "12 months": 280
+          },
+          "Shared Account": {
+            "1 month": 30,
+            "2 months": 50,
+            "3 months": 80,
+            "12 months": 150
+          }
+        }
+      },
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎬</span>
-          <div>
-            <div class="prod-title">Viu Premium</div>
-            <div class="prod-sub">ID: viu • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱70</li>
-            <li>2 Months – ₱105</li>
-            <li>3 Months – ₱145</li>
-            <li>4 Months – ₱170</li>
-            <li>6 Months – ₱205</li>
-            <li>10 Months – ₱280</li>
-            <li>12 Months – ₱310</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱30</li>
-            <li>2 Months – ₱55</li>
-            <li>3 Months – ₱75</li>
-            <li>4 Months – ₱90</li>
-            <li>6 Months – ₱120</li>
-            <li>10 Months – ₱190</li>
-            <li>12 Months – ₱220</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      // ===== Educational =====
+      {
+        id: "quizlet",
+        name: "Quizlet+",
+        icon: "📚",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 45,
+            "2 months": 65,
+            "3 months": 100
+          },
+          "Shared Account": {
+            "1 month": 20,
+            "2 months": 35,
+            "3 months": 50
+          }
+        }
+      },
+      {
+        id: "scribd",
+        name: "Scribd Premium",
+        icon: "📖",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 50,
+            "2 months": 85,
+            "3 months": 120
+          },
+          "Shared Account": {
+            "1 month": 30,
+            "2 months": 50,
+            "3 months": 80
+          }
+        }
+      },
+      {
+        id: "studocu",
+        name: "Studocu Premium",
+        icon: "🎓",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 50,
+            "2 months": 85,
+            "3 months": 120
+          },
+          "Shared Account": {
+            "1 month": 30,
+            "2 months": 50,
+            "3 months": 80
+          }
+        }
+      },
+      {
+        id: "duolingo",
+        name: "Duolingo Super",
+        icon: "🧑‍🎓",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 80,
+            "2 months": 130,
+            "3 months": 170
+          }
+        }
+      },
+      {
+        id: "turnitin-student",
+        name: "Turnitin Student",
+        icon: "📝",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "7 days": 35,
+            "14 days": 50,
+            "1 month": 80,
+            "2 months": 140,
+            "3 months": 160,
+            "6 months": 330,
+            "12 months": 580
+          }
+        }
+      },
+      {
+        id: "turnitin-instructor",
+        name: "Turnitin Instructor",
+        icon: "👨‍🏫",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 520
+          },
+          "Shared Account": {
+            "7 days": 120,
+            "14 days": 175,
+            "1 month": 280
+          }
+        }
+      },
+      {
+        id: "grammarly",
+        name: "Grammarly Premium",
+        icon: "✍️",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 85
+          },
+          "Shared Account": {
+            "1 month": 35,
+            "2 months": 65,
+            "3 months": 95
+          }
+        }
+      },
+      {
+        id: "quillbot",
+        name: "Quillbot Premium",
+        icon: "📝",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 100
+          },
+          "Shared Account": {
+            "1 month": 45,
+            "2 months": 75,
+            "3 months": 110
+          }
+        }
+      },
+      {
+        id: "ms-365",
+        name: "Microsoft 365",
+        icon: "💻",
+        category: "educational",
+        pricing: {
+          "Solo Account": {
+            "1 month": 55,
+            "2 months": 90,
+            "3 months": 120,
+            "1 year": 250
+          },
+          "Shared Account": {
+            "1 month": 25,
+            "2 months": 45,
+            "3 months": 65,
+            "1 year": 120
+          }
+        }
+      },
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎭</span>
-          <div>
-            <div class="prod-title">VIVAMAX VIVAONE</div>
-            <div class="prod-sub">ID: viva-max • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 15</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱110</li>
-            <li>2 Months – ₱145</li>
-            <li>3 Months – ₱170</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱65</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱120</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      // ===== Editing Tools =====
+      {
+        id: "canva",
+        name: "Canva Pro",
+        icon: "🎨",
+        category: "editing",
+        pricing: {
+          "Edu Lifetime": {
+            "No warranty": 19,
+            "3 months warranty": 39,
+            "6 months warranty": 49,
+            "12 months warranty": 69
+          },
+          "Teamhead": {
+            "1 month": 45,
+            "2 months": 55,
+            "3 months": 65,
+            "4 months": 75,
+            "5 months": 85,
+            "6 months": 95
+          },
+          "Solo": {
+            "1 month": 25,
+            "2 months": 35,
+            "3 months": 45,
+            "4 months": 55,
+            "5 months": 65,
+            "6 months": 75
+          },
+          "Invite": {
+            "1 month": 10,
+            "2 months": 15,
+            "3 months": 20,
+            "4 months": 25,
+            "5 months": 30,
+            "6 months": 35
+          }
+        }
+      },
+      {
+        id: "picsart",
+        name: "Picsart Gold",
+        icon: "👏",
+        category: "editing",
+        pricing: {
+          "Teamhead Account": {
+            "1 month": 70,
+            "2 months": 115,
+            "3 months": 150
+          },
+          "Solo Account": {
+            "1 month": 50,
+            "2 months": 85,
+            "3 months": 120
+          },
+          "Shared Account": {
+            "1 month": 25,
+            "2 months": 45,
+            "3 months": 70
+          }
+        }
+      },
+      {
+        id: "capcut",
+        name: "CapCut Pro",
+        icon: "📝",
+        category: "editing",
+        pricing: {
+          "Solo Account": {
+            "7 days": 50,
+            "1 month": 130,
+            "2 months": 190,
+            "3 months": 240
+          },
+          "Shared Account": {
+            "1 month": 70,
+            "2 months": 120,
+            "3 months": 155
+          }
+        }
+      },
+      {
+        id: "alight-motion",
+        name: "Alight Motion Pro",
+        icon: "📱",
+        category: "editing",
+        pricing: {
+          "Solo Account": {
+            "1 month": 90,
+            "12 months": 149
+          },
+          "Shared Account": {
+            "1 month": 35,
+            "12 months": 69
+          }
+        }
+      },
+      {
+        id: "remini",
+        name: "Remini Web",
+        icon: "✨",
+        category: "editing",
+        pricing: {
+          "Solo Account": {
+            "7 days": 30,
+            "1 month": 50
+          },
+          "Shared Account": {
+            "7 days": 15,
+            "1 month": 25
+          }
+        }
+      },
+      {
+        id: "camscanner",
+        name: "CamScanner Pro",
+        icon: "📁",
+        category: "editing",
+        pricing: {
+          "Solo Account": {
+            "1 month": 100,
+            "2 months": 180,
+            "3 months": 250
+          },
+          "Shared Account": {
+            "1 month": 50,
+            "2 months": 90,
+            "3 months": 120
+          }
+        }
+      },
+      {
+        id: "small-pdf",
+        name: "Small PDF Pro",
+        icon: "📁",
+        category: "editing",
+        pricing: {
+          "Solo Account": {
+            "1 month": 55,
+            "2 months": 95,
+            "3 months": 130
+          },
+          "Shared Account": {
+            "1 month": 30,
+            "2 months": 50,
+            "3 months": 70
+          }
+        }
+      },
+      {
+        id: "zoom",
+        name: "Zoom Pro",
+        icon: "📽️",
+        category: "editing",
+        pricing: {
+          "Solo Account": {
+            "14 days": 45,
+            "1 month": 70,
+            "2 months": 120,
+            "3 months": 160
+          }
+        }
+      }
+    ];
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📱</span>
-          <div>
-            <div class="prod-title">WeTV</div>
-            <div class="prod-sub">ID: wetv • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱150</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱55</li>
-            <li>2 Months – ₱95</li>
-            <li>3 Months – ₱135</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    // ========= RENDERING LOGIC =========
+    const catalogRoot = document.getElementById("catalogRoot");
+    const searchInput = document.getElementById("searchInput");
+    const catButtons = document.querySelectorAll(".cat-btn");
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📺</span>
-          <div>
-            <div class="prod-title">IWANT TFC</div>
-            <div class="prod-sub">ID: iwant-tfc • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱145</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱125</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    let activeCategory = "all";
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎮</span>
-          <div>
-            <div class="prod-title">Crunchyroll</div>
-            <div class="prod-sub">ID: crunchyroll • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 10</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo profile</h4>
-          <ul>
-            <li>1 Month – ₱75</li>
-            <li>2 Months – ₱115</li>
-            <li>3 Months – ₱160</li>
-            <li>4 Months – ₱195</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared profile</h4>
-          <ul>
-            <li>1 Month – ₱35</li>
-            <li>2 Months – ₱60</li>
-            <li>3 Months – ₱90</li>
-            <li>4 Months – ₱115</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    function formatPrice(amount) {
+      return "₱" + amount.toLocaleString("en-PH");
+    }
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🦁</span>
-          <div>
-            <div class="prod-title">Disney+</div>
-            <div class="prod-sub">ID: disney-plus • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 12</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱390</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo profile</h4>
-          <ul>
-            <li>1 Month – ₱160</li>
-            <li>2 Months – ₱315</li>
-            <li>4 Months – ₱630</li>
-            <li>10 Months – ₱1480</li>
-            <li>12 Months – ₱1700</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared profile</h4>
-          <ul>
-            <li>1 Month – ₱85</li>
-            <li>2 Months – ₱165</li>
-            <li>4 Months – ₱330</li>
-            <li>10 Months – ₱720</li>
-            <li>12 Months – ₱880</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    function groupByCategory(products) {
+      const map = {};
+      products.forEach(p => {
+        if (!map[p.category]) map[p.category] = [];
+        map[p.category].push(p);
+      });
+      return map;
+    }
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📺</span>
-          <div>
-            <div class="prod-title">Bilibili</div>
-            <div class="prod-sub">ID: bilibili • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱45</li>
-            <li>2 Months – ₱75</li>
-            <li>3 Months – ₱105</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    function renderCatalog() {
+      const query = (searchInput.value || "").toLowerCase().trim();
+      const filtered = PRODUCTS.filter(p => {
+        const matchCategory = activeCategory === "all" || p.category === activeCategory;
+        const matchSearch = !query || p.name.toLowerCase().includes(query);
+        return matchCategory && matchSearch;
+      });
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📱</span>
-          <div>
-            <div class="prod-title">Loklok</div>
-            <div class="prod-sub">ID: loklok • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 7</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱150</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱65</li>
-            <li>2 Months – ₱115</li>
-            <li>3 Months – ₱170</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      const byCat = groupByCategory(filtered);
+      catalogRoot.innerHTML = "";
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📺</span>
-          <div>
-            <div class="prod-title">iQiyi</div>
-            <div class="prod-sub">ID: iqiyi • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱135</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      const categoryLabels = {
+        entertainment: "Entertainment",
+        streaming: "Streaming",
+        ai: "AI Tools",
+        educational: "Educational",
+        editing: "Editing Tools"
+      };
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📹</span>
-          <div>
-            <div class="prod-title">HBO Max</div>
-            <div class="prod-sub">ID: hbo-max • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 10</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱240</li>
-            <li>2 Months – ₱360</li>
-            <li>3 Months – ₱480</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo profile</h4>
-          <ul>
-            <li>1 Month – ₱135</li>
-            <li>2 Months – ₱240</li>
-            <li>3 Months – ₱350</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared profile</h4>
-          <ul>
-            <li>1 Month – ₱70</li>
-            <li>2 Months – ₱120</li>
-            <li>3 Months – ₱170</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      const catIcons = {
+        entertainment: "🎬",
+        streaming: "🎵",
+        ai: "🤖",
+        educational: "📚",
+        editing: "🎨"
+      };
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🛒</span>
-          <div>
-            <div class="prod-title">Amazon Prime</div>
-            <div class="prod-sub">ID: amazon-prime • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 15</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱80</li>
-            <li>2 Months – ₱110</li>
-            <li>3 Months – ₱135</li>
-            <li>4 Months – ₱160</li>
-            <li>5 Months – ₱185</li>
-            <li>6 Months – ₱210</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo profile</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱80</li>
-            <li>3 Months – ₱110</li>
-            <li>4 Months – ₱135</li>
-            <li>5 Months – ₱150</li>
-            <li>6 Months – ₱170</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared profile</h4>
-          <ul>
-            <li>1 Month – ₱30</li>
-            <li>2 Months – ₱50</li>
-            <li>3 Months – ₱70</li>
-            <li>4 Months – ₱80</li>
-            <li>5 Months – ₱90</li>
-            <li>6 Months – ₱100</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      if (!filtered.length) {
+        const p = document.createElement("div");
+        p.className = "no-results";
+        p.textContent = "No products found for your current filter/search.";
+        catalogRoot.appendChild(p);
+        return;
+      }
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📺</span>
-          <div>
-            <div class="prod-title">Youku</div>
-            <div class="prod-sub">ID: youku • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱125</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱125</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      Object.keys(categoryLabels).forEach(catKey => {
+        const items = byCat[catKey];
+        if (!items || !items.length) return;
 
-    <details class="product-card" data-category="entertainment">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🏀</span>
-          <div>
-            <div class="prod-title">NBA League Pass Premium</div>
-            <div class="prod-sub">ID: nba-league-pass • Entertainment</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 5</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱150</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱75</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+        const title = document.createElement("div");
+        title.className = "category-title";
+        title.innerHTML = `<span class="icon">${catIcons[catKey] || "📦"}</span>${categoryLabels[catKey]}`;
+        catalogRoot.appendChild(title);
 
-    <!-- ============= STREAMING / MUSIC ============= -->
+        const grid = document.createElement("div");
+        grid.className = "grid";
 
-    <details class="product-card" data-category="streaming">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📹</span>
-          <div>
-            <div class="prod-title">YouTube Premium</div>
-            <div class="prod-sub">ID: youtube • Streaming</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 20</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Famhead</h4>
-          <ul>
-            <li>1 Month – ₱70</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱125</li>
-            <li>4 Months – ₱150</li>
-            <li>5 Months – ₱175</li>
-            <li>6 Months – ₱200</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo</h4>
-          <ul>
-            <li>1 Month – ₱45</li>
-            <li>2 Months – ₱60</li>
-            <li>3 Months – ₱85</li>
-            <li>4 Months – ₱105</li>
-            <li>5 Months – ₱125</li>
-            <li>6 Months – ₱145</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Invite</h4>
-          <ul>
-            <li>1 Month – ₱20</li>
-            <li>2 Months – ₱35</li>
-            <li>3 Months – ₱50</li>
-            <li>4 Months – ₱60</li>
-            <li>5 Months – ₱70</li>
-            <li>6 Months – ₱80</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+        items.forEach(prod => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.dataset.pid = prod.id;
 
-    <details class="product-card" data-category="streaming">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎵</span>
-          <div>
-            <div class="prod-title">Spotify Premium</div>
-            <div class="prod-sub">ID: spotify • Streaming</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 15</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo FW (with warranty)</h4>
-          <ul>
-            <li>1 Month – ₱60</li>
-            <li>2 Months – ₱110</li>
-            <li>3 Months – ₱150</li>
-            <li>4 Months – ₱200</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo NW (no warranty)</h4>
-          <ul>
-            <li>1 Month – ₱45</li>
-            <li>2 Months – ₱80</li>
-            <li>3 Months – ₱120</li>
-            <li>4 Months – ₱150</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          const iconDiv = document.createElement("div");
+          iconDiv.className = "card-icon";
+          iconDiv.textContent = prod.icon || "📦";
 
-    <details class="product-card" data-category="streaming">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎧</span>
-          <div>
-            <div class="prod-title">Apple Music</div>
-            <div class="prod-sub">ID: apple-music • Streaming</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 12</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱49</li>
-            <li>2 Months – ₱89</li>
-            <li>3 Months – ₱129</li>
-            <li>4 Months – ₱159</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          const nameDiv = document.createElement("div");
+          nameDiv.className = "card-name";
+          nameDiv.textContent = prod.name;
 
-    <!-- ============= AI TOOLS ============= -->
+          const tagDiv = document.createElement("div");
+          tagDiv.className = "card-tag";
+          tagDiv.textContent = "View pricing";
 
-    <details class="product-card" data-category="ai" open>
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🤖</span>
-          <div>
-            <div class="prod-title">ChatGPT Plus</div>
-            <div class="prod-sub">ID: chatgpt • AI Tools</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 10</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱600</li>
-            <li>2 Months – ₱1050</li>
-            <li>3 Months – ₱1500</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱120</li>
-            <li>2 Months – ₱200</li>
-            <li>3 Months – ₱290</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          card.appendChild(iconDiv);
+          card.appendChild(nameDiv);
+          card.appendChild(tagDiv);
 
-    <details class="product-card" data-category="ai">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">💬</span>
-          <div>
-            <div class="prod-title">ChatGPT Go</div>
-            <div class="prod-sub">Custom plan • AI Tools</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">live prices</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱70</li>
-            <li>1 Year – ₱300</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱230</li>
-            <li>1 Year – ₱750</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          card.addEventListener("click", () => openModalForProduct(prod));
 
-    <details class="product-card" data-category="ai">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🧠</span>
-          <div>
-            <div class="prod-title">Blackbox AI</div>
-            <div class="prod-sub">ID: blackbox-ai • AI Tools</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 0 (OOS)</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱90</li>
-            <li>2 Months – ₱170</li>
-            <li>3 Months – ₱250</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          grid.appendChild(card);
+        });
 
-    <details class="product-card" data-category="ai">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🔍</span>
-          <div>
-            <div class="prod-title">Perplexity AI</div>
-            <div class="prod-sub">ID: perplexity • AI Tools</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱120</li>
-            <li>4 Months – ₱200</li>
-            <li>6 Months – ₱250</li>
-            <li>12 Months – ₱300</li>
-            <li>24 Months – ₱450</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱55</li>
-            <li>4 Months – ₱140</li>
-            <li>6 Months – ₱190</li>
-            <li>12 Months – ₱230</li>
-            <li>24 Months – ₱350</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+        catalogRoot.appendChild(grid);
+      });
+    }
 
-    <details class="product-card" data-category="ai">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">☁️</span>
-          <div>
-            <div class="prod-title">Google One + Gemini AI</div>
-            <div class="prod-sub">ID: google-one • AI Tools</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 10</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱85</li>
-            <li>3 Months – ₱120</li>
-            <li>12 Months – ₱280</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱30</li>
-            <li>2 Months – ₱50</li>
-            <li>3 Months – ₱80</li>
-            <li>12 Months – ₱150</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    // ========= MODAL LOGIC =========
+    const modalOverlay = document.getElementById("modalOverlay");
+    const modalIcon = document.getElementById("modalIcon");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalBody = document.getElementById("modalBody");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
 
-    <!-- ============= EDUCATIONAL ============= -->
+    function openModalForProduct(prod) {
+      modalIcon.textContent = prod.icon || "📦";
+      modalTitle.textContent = prod.name;
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📚</span>
-          <div>
-            <div class="prod-title">Quizlet+</div>
-            <div class="prod-sub">ID: quizlet • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱45</li>
-            <li>2 Months – ₱65</li>
-            <li>3 Months – ₱100</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱20</li>
-            <li>2 Months – ₱35</li>
-            <li>3 Months – ₱50</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      const catNames = {
+        entertainment: "Entertainment",
+        streaming: "Streaming",
+        ai: "AI Tool",
+        educational: "Educational",
+        editing: "Editing Tool"
+      };
+      modalCategory.textContent = catNames[prod.category] || "";
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📖</span>
-          <div>
-            <div class="prod-title">Scribd Premium</div>
-            <div class="prod-sub">ID: scribd • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 7</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱85</li>
-            <li>3 Months – ₱120</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱30</li>
-            <li>2 Months – ₱50</li>
-            <li>3 Months – ₱80</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      // build pricing blocks
+      modalBody.innerHTML = "";
+      const pricing = prod.pricing || {};
+      const types = Object.keys(pricing);
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎓</span>
-          <div>
-            <div class="prod-title">Studocu Premium</div>
-            <div class="prod-sub">ID: studocu • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱85</li>
-            <li>3 Months – ₱120</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱30</li>
-            <li>2 Months – ₱50</li>
-            <li>3 Months – ₱80</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      if (!types.length) {
+        const p = document.createElement("div");
+        p.textContent = "No pricing data.";
+        modalBody.appendChild(p);
+      } else {
+        types.forEach(typeName => {
+          const block = document.createElement("div");
+          block.className = "account-block";
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🧑‍🎓</span>
-          <div>
-            <div class="prod-title">Duolingo Super</div>
-            <div class="prod-sub">ID: duolingo • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱80</li>
-            <li>2 Months – ₱130</li>
-            <li>3 Months – ₱170</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          const title = document.createElement("div");
+          title.className = "account-title";
+          title.textContent = typeName;
+          block.appendChild(title);
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📝</span>
-          <div>
-            <div class="prod-title">Turnitin Student</div>
-            <div class="prod-sub">ID: turnitin-student • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>7 Days – ₱35</li>
-            <li>14 Days – ₱50</li>
-            <li>1 Month – ₱80</li>
-            <li>2 Months – ₱140</li>
-            <li>3 Months – ₱160</li>
-            <li>6 Months – ₱330</li>
-            <li>12 Months – ₱580</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          const entries = pricing[typeName];
+          Object.keys(entries).forEach(durationText => {
+            const line = document.createElement("div");
+            line.className = "price-line";
+            const amount = entries[durationText];
+            line.innerHTML =
+              `<span class="duration">${durationText}</span> – ` +
+              `<span class="amount">${formatPrice(amount)}</span>`;
+            block.appendChild(line);
+          });
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">👨‍🏫</span>
-          <div>
-            <div class="prod-title">Turnitin Instructor</div>
-            <div class="prod-sub">ID: turnitin-instructor • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 5</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱520</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>7 Days – ₱120</li>
-            <li>14 Days – ₱175</li>
-            <li>1 Month – ₱280</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+          modalBody.appendChild(block);
+        });
+      }
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">✍️</span>
-          <div>
-            <div class="prod-title">Grammarly Premium</div>
-            <div class="prod-sub">ID: grammarly • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱85</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱35</li>
-            <li>2 Months – ₱65</li>
-            <li>3 Months – ₱95</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      modalOverlay.style.display = "flex";
+    }
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📝</span>
-          <div>
-            <div class="prod-title">Quillbot Premium</div>
-            <div class="prod-sub">ID: quillbot • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱100</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱45</li>
-            <li>2 Months – ₱75</li>
-            <li>3 Months – ₱110</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    function closeModal() {
+      modalOverlay.style.display = "none";
+    }
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">💻</span>
-          <div>
-            <div class="prod-title">Microsoft 365</div>
-            <div class="prod-sub">ID: ms-365 • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 15</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account (monthly)</h4>
-          <ul>
-            <li>1 Month – ₱55</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱120</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account (monthly)</h4>
-          <ul>
-            <li>1 Month – ₱25</li>
-            <li>2 Months – ₱45</li>
-            <li>3 Months – ₱65</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4><strong>Live promo – Yearly</strong></h4>
-          <ul>
-            <li>1 Year – ₱250 (solo account)</li>
-            <li>1 Year – ₱120 (shared account)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    modalCloseBtn.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
 
-    <details class="product-card" data-category="educational">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📽️</span>
-          <div>
-            <div class="prod-title">Zoom Pro</div>
-            <div class="prod-sub">ID: zoom • Educational</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>14 Days – ₱45</li>
-            <li>1 Month – ₱70</li>
-            <li>2 Months – ₱120</li>
-            <li>3 Months – ₱160</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- ============= EDITING / DESIGN ============= -->
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">🎨</span>
-          <div>
-            <div class="prod-title">Canva Pro</div>
-            <div class="prod-sub">ID: canva • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 25</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Edu lifetime</h4>
-          <ul>
-            <li>No Warranty – ₱19</li>
-            <li>3 Months Warranty – ₱39</li>
-            <li>6 Months Warranty – ₱49</li>
-            <li>12 Months Warranty – ₱69</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Teamhead</h4>
-          <ul>
-            <li>1 Month – ₱45</li>
-            <li>2 Months – ₱55</li>
-            <li>3 Months – ₱65</li>
-            <li>4 Months – ₱75</li>
-            <li>5 Months – ₱85</li>
-            <li>6 Months – ₱95</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo</h4>
-          <ul>
-            <li>1 Month – ₱25</li>
-            <li>2 Months – ₱35</li>
-            <li>3 Months – ₱45</li>
-            <li>4 Months – ₱55</li>
-            <li>5 Months – ₱65</li>
-            <li>6 Months – ₱75</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Invite</h4>
-          <ul>
-            <li>1 Month – ₱10</li>
-            <li>2 Months – ₱15</li>
-            <li>3 Months – ₱20</li>
-            <li>4 Months – ₱25</li>
-            <li>5 Months – ₱30</li>
-            <li>6 Months – ₱35</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">👏</span>
-          <div>
-            <div class="prod-title">Picsart Gold</div>
-            <div class="prod-sub">ID: picsart • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 12</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Teamhead account</h4>
-          <ul>
-            <li>1 Month – ₱70</li>
-            <li>2 Months – ₱115</li>
-            <li>3 Months – ₱150</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱85</li>
-            <li>3 Months – ₱120</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱25</li>
-            <li>2 Months – ₱45</li>
-            <li>3 Months – ₱70</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📝</span>
-          <div>
-            <div class="prod-title">CapCut Pro</div>
-            <div class="prod-sub">ID: capcut • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 10</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>7 Days – ₱50</li>
-            <li>1 Month – ₱130</li>
-            <li>2 Months – ₱190</li>
-            <li>3 Months – ₱240</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱70</li>
-            <li>2 Months – ₱120</li>
-            <li>3 Months – ₱155</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📱</span>
-          <div>
-            <div class="prod-title">Alight Motion Pro</div>
-            <div class="prod-sub">ID: alight-motion • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱90</li>
-            <li>12 Months – ₱149</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱35</li>
-            <li>12 Months – ₱69</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">✨</span>
-          <div>
-            <div class="prod-title">Remini Web</div>
-            <div class="prod-sub">ID: remini • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 6</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>7 Days – ₱30</li>
-            <li>1 Month – ₱50</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>7 Days – ₱15</li>
-            <li>1 Month – ₱25</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📁</span>
-          <div>
-            <div class="prod-title">CamScanner Pro</div>
-            <div class="prod-sub">ID: cams-canner • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 8</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱100</li>
-            <li>2 Months – ₱180</li>
-            <li>3 Months – ₱250</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱50</li>
-            <li>2 Months – ₱90</li>
-            <li>3 Months – ₱120</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <details class="product-card" data-category="editing">
-      <summary>
-        <div class="prod-main">
-          <span class="prod-icon">📁</span>
-          <div>
-            <div class="prod-title">Small PDF Pro</div>
-            <div class="prod-sub">ID: small-pdf • Editing / Design</div>
-          </div>
-        </div>
-        <div class="prod-tags">
-          <span class="tag">stock: 7</span>
-          <span class="chevron">▼</span>
-        </div>
-      </summary>
-      <div class="prod-body">
-        <div class="pricing-group">
-          <h4>Solo account</h4>
-          <ul>
-            <li>1 Month – ₱55</li>
-            <li>2 Months – ₱95</li>
-            <li>3 Months – ₱130</li>
-          </ul>
-        </div>
-        <div class="pricing-group">
-          <h4>Shared account</h4>
-          <ul>
-            <li>1 Month – ₱30</li>
-            <li>2 Months – ₱50</li>
-            <li>3 Months – ₱70</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-  </section>
-</main>
-
-<script>
-  // simple category filter
-  const buttons = document.querySelectorAll(".filter-btn");
-  const cards = document.querySelectorAll(".product-card");
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter;
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      cards.forEach(card => {
-        const cat = card.dataset.category;
-        card.style.display = (filter === "all" || filter === cat) ? "" : "none";
+    // ========= FILTER EVENTS =========
+    catButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        catButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeCategory = btn.dataset.category || "all";
+        renderCatalog();
       });
     });
-  });
-</script>
+
+    searchInput.addEventListener("input", () => {
+      renderCatalog();
+    });
+
+    // Initial render
+    renderCatalog();
+  </script>
 </body>
 </html>
