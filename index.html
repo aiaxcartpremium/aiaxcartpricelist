@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Aiaxcart Premium – Catalog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
     :root {
       --primary: #ffb0b5;
       --secondary: #ffd3d6;
@@ -260,40 +263,55 @@
         padding: 16px;
       }
     }
-  </style></head>
+  </style>
+</head>
 <body>
   <div class="page-container">
     <h1>🛒 Aiaxcart Premium – Catalog</h1>
     <div class="subtitle">
-      FAST PROCESS. PAYMENT THEN PROCESS. 
-MOP: GCASH / MAYA 
-    </div><div class="note-box">
-  <strong>REMINDER:</strong> Huwag i-comment ang <em>tamang spelling</em> para maiwasan ang automatic filtering ng inyong mga comment. 
-</div>
+      FAST PROCESS. PAYMENT THEN ACCOUNT.<br>
+      MOP: GCASH / MAYA / MARIBANK
+    </div>
 
-<div class="top-controls">
-  <div class="search-wrap">
-    <input
-      type="text"
-      id="searchInput"
-      class="search-input"
-      placeholder="Search product name… (gamitin ang obfuscated names)"
-    />
+    <div class="note-box">
+      <strong>REMINDER:</strong> Huwag i-comment ang <em>tamang spelling</em> para maiwasan ang automatic filtering ng inyong mga comment. 
+    </div>
+
+    <div class="note-box" style="background:#f0f9ff;border-color:#d0e9ff;color:#134e6f;">
+      <strong>Paano mag-avail? / Contacts</strong><br>
+      • Direct message dito sa TikTok (DM)
+      • Facebook page: <strong>aiaxcart</strong>
+      • Facebook account: <strong>Shanaia Maureen</strong>
+      • Instagram: <strong>@shanmau_</strong>
+      • Telegram: <strong>@shanmau</strong>
+      </div>
+    
+
+    <div class="top-controls">
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search product name…"
+        />
+      </div>
+
+      <div class="category-filter">
+        <button class="cat-btn active" data-category="all">All</button>
+        <button class="cat-btn" data-category="entertainment">Entertainment</button>
+        <button class="cat-btn" data-category="streaming">Streaming</button>
+        <button class="cat-btn" data-category="ai">AI</button>
+        <button class="cat-btn" data-category="educational">Educational</button>
+        <button class="cat-btn" data-category="editing">Editing</button>
+      </div>
+    </div>
+
+    <div id="catalogRoot"></div>
   </div>
 
-  <div class="category-filter">
-    <button class="cat-btn active" data-category="all">All</button>
-    <button class="cat-btn" data-category="entertainment">Entertainment</button>
-    <button class="cat-btn" data-category="streaming">Streaming</button>
-    <button class="cat-btn" data-category="ai">AI</button>
-    <button class="cat-btn" data-category="educational">Educational</button>
-    <button class="cat-btn" data-category="editing">Editing</button>
-  </div>
-</div>
-
-<div id="catalogRoot"></div>
-
-  </div>  <!-- Modal -->  <div id="modalOverlay" class="modal-overlay">
+  <!-- Modal -->
+  <div id="modalOverlay" class="modal-overlay">
     <div class="modal-card">
       <button class="modal-close" id="modalCloseBtn">&times;</button>
       <div class="modal-header">
@@ -305,13 +323,15 @@ MOP: GCASH / MAYA
       <div class="modal-category" id="modalCategory"></div>
       <div id="modalBody"></div>
     </div>
-  </div>  <script>
+  </div>
+
+  <script>
     // ========= DATA: ALL PRODUCTS + PRICING (OBFUSCATED NAMES) =========
     const PRODUCTS = [
       // ===== Entertainment =====
       {
         id: "netflix",
-        name: "Netplix Premium",
+        name: "N3T•PLX Premium",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -337,7 +357,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "viu",
-        name: "Viyu Premium",
+        name: "V1-YÜ Premium",
         icon: "🎬",
         category: "entertainment",
         pricing: {
@@ -363,7 +383,25 @@ MOP: GCASH / MAYA
       },
       {
         id: "viva-max",
-        name: "VIVAMX VIVAONE",
+        name: "V1V-MX",
+        icon: "🎭",
+        category: "entertainment",
+        pricing: {
+          "Solo Account": {
+            "1 month": 120,
+            "2 months": 155,
+            "3 months": 180
+          },
+          "Shared Account": {
+            "1 month": 70,
+            "2 months": 95,
+            "3 months": 125
+          }
+        }
+      },
+{
+        id: "viva-one",
+        name: "V1V•1",
         icon: "🎭",
         category: "entertainment",
         pricing: {
@@ -381,7 +419,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "wetv",
-        name: "WeTiv Premium",
+        name: "WÉ-T1V Premium",
         icon: "📱",
         category: "entertainment",
         pricing: {
@@ -397,7 +435,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "iwant-tfc",
-        name: "iWant TFCx",
+        name: "îWnt T-FCx",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -413,7 +451,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "crunchyroll",
-        name: "Crunchyrol",
+        name: "Crünch-RØL",
         icon: "🎮",
         category: "entertainment",
         pricing: {
@@ -433,7 +471,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "disney-plus",
-        name: "Disny+",
+        name: "D!s-Nÿ⁺",
         icon: "🦁",
         category: "entertainment",
         pricing: {
@@ -458,7 +496,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "bilibili",
-        name: "BiliBili",
+        name: "Bîlî-BL",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -471,23 +509,19 @@ MOP: GCASH / MAYA
       },
       {
         id: "loklok",
-        name: "LokLokz",
+        name: "Løk-L0q BASIC",
         icon: "📱",
         category: "entertainment",
-        pricing: {
-          "Solo Account": {
-            "1 month": 150
-          },
+        pricing: 
           "Shared Account": {
             "1 month": 65,
             "2 months": 115,
             "3 months": 170
           }
-        }
       },
       {
         id: "iqiyi",
-        name: "iQiyix",
+        name: "1Q-îYx",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -500,7 +534,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "hbo-max",
-        name: "HBO-MAXX",
+        name: "HßØ M-AX",
         icon: "📹",
         category: "entertainment",
         pricing: {
@@ -523,7 +557,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "amazon-prime",
-        name: "Amazn Prime",
+        name: "Äm-ZN Prîme",
         icon: "🛒",
         category: "entertainment",
         pricing: {
@@ -555,7 +589,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "youku",
-        name: "YouKuX",
+        name: "YøK–UX",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -571,7 +605,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "nba-league-pass",
-        name: "NBA Pass Premium",
+        name: "N-BÄ PäsS Premium",
         icon: "🏀",
         category: "entertainment",
         pricing: {
@@ -587,7 +621,7 @@ MOP: GCASH / MAYA
       // ===== Streaming (Music) =====
       {
         id: "youtube",
-        name: "YouTube Premiumz",
+        name: "Yü-TB PréM",
         icon: "📹",
         category: "streaming",
         pricing: {
@@ -619,7 +653,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "spotify",
-        name: "Spotfy Premium",
+        name: "S-PøTfî PréM",
         icon: "🎵",
         category: "streaming",
         pricing: {
@@ -639,7 +673,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "apple-music",
-        name: "AppleMusic",
+        name: "ÄpL-Müsîq",
         icon: "🎧",
         category: "streaming",
         pricing: {
@@ -655,7 +689,7 @@ MOP: GCASH / MAYA
       // ===== AI Tools =====
       {
         id: "chatgpt-plus",
-        name: "ChatGP-T Plus",
+        name: "Chat-GpT Plus",
         icon: "🧠",
         category: "ai",
         pricing: {
@@ -673,7 +707,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "chatgpt-go",
-        name: "ChatGP-TO Go",
+        name: "Chat-GpT-Gõ",
         icon: "🤖",
         category: "ai",
         pricing: {
@@ -689,7 +723,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "blackbox-ai",
-        name: "Blackbx AI",
+        name: "Blâk-BX AÏ",
         icon: "🤖",
         category: "ai",
         pricing: {
@@ -702,7 +736,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "perplexity",
-        name: "Perplexiti AI",
+        name: "Prplx-T AÏ",
         icon: "🔍",
         category: "ai",
         pricing: {
@@ -724,7 +758,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "google-one",
-        name: "Google One + Gemini",
+        name: "Gøøgle1 + G-MNÏ",
         icon: "☁️",
         category: "ai",
         pricing: {
@@ -746,7 +780,7 @@ MOP: GCASH / MAYA
       // ===== Educational =====
       {
         id: "quizlet",
-        name: "Quizlet+",
+        name: "Qz-Let⁺",
         icon: "📚",
         category: "educational",
         pricing: {
@@ -764,7 +798,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "scribd",
-        name: "Scribd Premium",
+        name: "ScrîBD PréM",
         icon: "📖",
         category: "educational",
         pricing: {
@@ -782,7 +816,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "studocu",
-        name: "Studocu Premium",
+        name: "Stdø-Ku PréM",
         icon: "🎓",
         category: "educational",
         pricing: {
@@ -800,7 +834,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "duolingo",
-        name: "Duolingo Super",
+        name: "Duo-LîNGØ SúP",
         icon: "🧑‍🎓",
         category: "educational",
         pricing: {
@@ -813,7 +847,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "turnitin-student",
-        name: "Turnitn Student",
+        name: "TûrntN Stüd",
         icon: "📝",
         category: "educational",
         pricing: {
@@ -830,7 +864,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "turnitin-instructor",
-        name: "Turnitn Instructor",
+        name: "TûrntN Instrctr",
         icon: "👨‍🏫",
         category: "educational",
         pricing: {
@@ -846,7 +880,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "grammarly",
-        name: "Gramrly Premium",
+        name: "Gräm-Li PréM",
         icon: "✍️",
         category: "educational",
         pricing: {
@@ -862,7 +896,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "quillbot",
-        name: "Quillbt Premium",
+        name: "Qüill-BT PréM",
         icon: "📝",
         category: "educational",
         pricing: {
@@ -878,7 +912,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "ms-365",
-        name: "MS 365",
+        name: "M-S 3•6•5",
         icon: "💻",
         category: "educational",
         pricing: {
@@ -900,7 +934,7 @@ MOP: GCASH / MAYA
       // ===== Editing Tools =====
       {
         id: "canva",
-        name: "Canva Pro",
+        name: "Cãnv–Prø",
         icon: "🎨",
         category: "editing",
         pricing: {
@@ -938,7 +972,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "picsart",
-        name: "PicsArt Gold",
+        name: "Px-Ärt GLD",
         icon: "👏",
         category: "editing",
         pricing: {
@@ -961,7 +995,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "capcut",
-        name: "CapCut Pro",
+        name: "Cp-Küt Prø",
         icon: "📝",
         category: "editing",
         pricing: {
@@ -980,7 +1014,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "alight-motion",
-        name: "AlightMotion Pro",
+        name: "A-Lgt Mtn Prø",
         icon: "📱",
         category: "editing",
         pricing: {
@@ -996,7 +1030,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "remini",
-        name: "Remini Web",
+        name: "RëM-Nî WëB",
         icon: "✨",
         category: "editing",
         pricing: {
@@ -1012,7 +1046,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "camscanner",
-        name: "CamScanner Pro",
+        name: "Cäm-SCN Prø",
         icon: "📁",
         category: "editing",
         pricing: {
@@ -1030,7 +1064,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "small-pdf",
-        name: "Small PDF Pro",
+        name: "Sml-PDF Prø",
         icon: "📁",
         category: "editing",
         pricing: {
@@ -1048,7 +1082,7 @@ MOP: GCASH / MAYA
       },
       {
         id: "zoom",
-        name: "Zoom Pro",
+        name: "Zøm-Prø",
         icon: "📽️",
         category: "editing",
         pricing: {
@@ -1242,5 +1276,6 @@ MOP: GCASH / MAYA
 
     // Initial render
     renderCatalog();
-  </script></body>
+  </script>
+</body>
 </html>
