@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Aiaxcart Premium – Catalog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <style>
     :root {
       --primary: #ffb0b5;
       --secondary: #ffd3d6;
@@ -263,55 +260,50 @@
         padding: 16px;
       }
     }
-  </style>
-</head>
+  </style></head>
 <body>
   <div class="page-container">
     <h1>🛒 Aiaxcart Premium – Catalog</h1>
     <div class="subtitle">
       FAST PROCESS. PAYMENT THEN ACCOUNT.<br>
       MOP: GCASH / MAYA / MARIBANK
-    </div>
+    </div><div class="note-box">
+  <strong>REMINDER:</strong> Huwag i-comment ang <em>tamang spelling</em> para maiwasan ang automatic filtering ng inyong mga comment. 
+</div>
 
-    <div class="note-box">
-      <strong>REMINDER:</strong> Huwag i-comment ang <em>tamang spelling</em> para maiwasan ang automatic filtering ng inyong mga comment. 
-    </div>
+<div class="note-box" style="background:#f0f9ff;border-color:#d0e9ff;color:#134e6f; text-align: left;">
+  <strong>Paano mag-avail?</strong><br>
+  Facebook page: <strong>aiaxcart</strong><br>
+  Facebook account: <strong>Shanaia Maureen</strong><br>
+  Instagram: <strong>@shanmau_</strong><br>
+  Telegram: <strong>@shanmau</strong><br>
+  TikTok: <strong>Direct message (DM)</strong>
+  <div style="margin-top:6px;font-size:0.87rem;color:#254b57">Para umorder: i-DM ang product name (gamitin ang ipinakitang obfuscated name) at i-attach ang screenshot ng proof of payment.</div>
+</div>
 
-    <div class="note-box" style="background:#f0f9ff;border-color:#d0e9ff;color:#134e6f;">
-      <strong>Paano mag-avail? / Contacts</strong><br>
-      • Direct message dito sa TikTok (DM)
-      • Facebook page: <strong>aiaxcart</strong>
-      • Facebook account: <strong>Shanaia Maureen</strong>
-      • Instagram: <strong>@shanmau_</strong>
-      • Telegram: <strong>@shanmau</strong>
-      </div>
-    
-
-    <div class="top-controls">
-      <div class="search-wrap">
-        <input
-          type="text"
-          id="searchInput"
-          class="search-input"
-          placeholder="Search product name…"
-        />
-      </div>
-
-      <div class="category-filter">
-        <button class="cat-btn active" data-category="all">All</button>
-        <button class="cat-btn" data-category="entertainment">Entertainment</button>
-        <button class="cat-btn" data-category="streaming">Streaming</button>
-        <button class="cat-btn" data-category="ai">AI</button>
-        <button class="cat-btn" data-category="educational">Educational</button>
-        <button class="cat-btn" data-category="editing">Editing</button>
-      </div>
-    </div>
-
-    <div id="catalogRoot"></div>
+<div class="top-controls">
+  <div class="search-wrap">
+    <input
+      type="text"
+      id="searchInput"
+      class="search-input"
+      placeholder="Search product name… (gamitin ang obfuscated names)"
+    />
   </div>
 
-  <!-- Modal -->
-  <div id="modalOverlay" class="modal-overlay">
+  <div class="category-filter">
+    <button class="cat-btn active" data-category="all">All</button>
+    <button class="cat-btn" data-category="entertainment">Entertainment</button>
+    <button class="cat-btn" data-category="streaming">Streaming</button>
+    <button class="cat-btn" data-category="ai">AI</button>
+    <button class="cat-btn" data-category="educational">Educational</button>
+    <button class="cat-btn" data-category="editing">Editing</button>
+  </div>
+</div>
+
+<div id="catalogRoot"></div>
+
+  </div>  <!-- Modal -->  <div id="modalOverlay" class="modal-overlay">
     <div class="modal-card">
       <button class="modal-close" id="modalCloseBtn">&times;</button>
       <div class="modal-header">
@@ -323,9 +315,7 @@
       <div class="modal-category" id="modalCategory"></div>
       <div id="modalBody"></div>
     </div>
-  </div>
-
-  <script>
+  </div>  <script>
     // ========= DATA: ALL PRODUCTS + PRICING (OBFUSCATED NAMES) =========
     const PRODUCTS = [
       // ===== Entertainment =====
@@ -388,18 +378,18 @@
         category: "entertainment",
         pricing: {
           "Solo Account": {
-            "1 month": 120,
-            "2 months": 155,
-            "3 months": 180
+            "1 month": 110,
+            "2 months": 145,
+            "3 months": 170
           },
           "Shared Account": {
-            "1 month": 70,
-            "2 months": 95,
-            "3 months": 125
+            "1 month": 65,
+            "2 months": 90,
+            "3 months": 120
           }
         }
       },
-{
+      {
         id: "viva-one",
         name: "V1V•1",
         icon: "🎭",
@@ -410,6 +400,13 @@
             "2 months": 145,
             "3 months": 170
           },
+          "Shared Account": {
+            "1 month": 65,
+            "2 months": 90,
+            "3 months": 120
+          }
+        }
+      },
           "Shared Account": {
             "1 month": 65,
             "2 months": 90,
@@ -509,15 +506,19 @@
       },
       {
         id: "loklok",
-        name: "Løk-L0q BASIC",
+        name: "Løk-L0q",
         icon: "📱",
         category: "entertainment",
-        pricing: 
+        pricing: {
+          "Solo Account": {
+            "1 month": 150
+          },
           "Shared Account": {
             "1 month": 65,
             "2 months": 115,
             "3 months": 170
           }
+        }
       },
       {
         id: "iqiyi",
@@ -689,7 +690,7 @@
       // ===== AI Tools =====
       {
         id: "chatgpt-plus",
-        name: "Chat-GpT Plus",
+        name: "Chat-GΠ Plus",
         icon: "🧠",
         category: "ai",
         pricing: {
@@ -707,7 +708,7 @@
       },
       {
         id: "chatgpt-go",
-        name: "Chat-GpT-Gõ",
+        name: "Chat-GΠ-Gõ",
         icon: "🤖",
         category: "ai",
         pricing: {
@@ -1276,6 +1277,5 @@
 
     // Initial render
     renderCatalog();
-  </script>
-</body>
+  </script></body>
 </html>
