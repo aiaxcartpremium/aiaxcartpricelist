@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Aiaxcart Premium – Catalog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <style>
     :root {
       --primary: #ffb0b5;
       --secondary: #ffd3d6;
@@ -41,7 +38,19 @@
       text-align: center;
       font-size: 0.9rem;
       color: #6e5a57;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
+    }
+
+    .note-box {
+      max-width: 720px;
+      margin: 0 auto 16px;
+      background: #fff3f5;
+      border: 1px solid #ffdfe4;
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: #7a3b44;
+      font-size: 0.9rem;
+      text-align: center;
     }
 
     /* Top controls */
@@ -251,40 +260,39 @@
         padding: 16px;
       }
     }
-  </style>
-</head>
+  </style></head>
 <body>
   <div class="page-container">
     <h1>🛒 Aiaxcart Premium – Catalog</h1>
     <div class="subtitle">
-      FAST PROCESS. GCASH MAYA
-    </div>
+      FAST PROCESS. GCASH / MAYA
+    </div><div class="note-box">
+  <strong>PAUNAWA:</strong> Huwag i-comment o i-type ang <em>totoong</em> brand names sa TikTok comments — gamitin lamang ang ipinakitang obfuscated names (hal. "Netplix" imbes na Netflix). Ito ay para maiwasan ang automatic filtering ng comments.
+</div>
 
-    <div class="top-controls">
-      <div class="search-wrap">
-        <input
-          type="text"
-          id="searchInput"
-          class="search-input"
-          placeholder="Search product name…"
-        />
-      </div>
-
-      <div class="category-filter">
-        <button class="cat-btn active" data-category="all">All</button>
-        <button class="cat-btn" data-category="entertainment">Entertainment</button>
-        <button class="cat-btn" data-category="streaming">Streaming</button>
-        <button class="cat-btn" data-category="ai">AI</button>
-        <button class="cat-btn" data-category="educational">Educational</button>
-        <button class="cat-btn" data-category="editing">Editing</button>
-      </div>
-    </div>
-
-    <div id="catalogRoot"></div>
+<div class="top-controls">
+  <div class="search-wrap">
+    <input
+      type="text"
+      id="searchInput"
+      class="search-input"
+      placeholder="Search product name… (gamitin ang obfuscated names)"
+    />
   </div>
 
-  <!-- Modal -->
-  <div id="modalOverlay" class="modal-overlay">
+  <div class="category-filter">
+    <button class="cat-btn active" data-category="all">All</button>
+    <button class="cat-btn" data-category="entertainment">Entertainment</button>
+    <button class="cat-btn" data-category="streaming">Streaming</button>
+    <button class="cat-btn" data-category="ai">AI</button>
+    <button class="cat-btn" data-category="educational">Educational</button>
+    <button class="cat-btn" data-category="editing">Editing</button>
+  </div>
+</div>
+
+<div id="catalogRoot"></div>
+
+  </div>  <!-- Modal -->  <div id="modalOverlay" class="modal-overlay">
     <div class="modal-card">
       <button class="modal-close" id="modalCloseBtn">&times;</button>
       <div class="modal-header">
@@ -296,16 +304,13 @@
       <div class="modal-category" id="modalCategory"></div>
       <div id="modalBody"></div>
     </div>
-  </div>
-
-  <script>
-    // ========= DATA: ALL PRODUCTS + PRICING =========
-    // duration text is already display-ready (no code mapping needed)
+  </div>  <script>
+    // ========= DATA: ALL PRODUCTS + PRICING (OBFUSCATED NAMES) =========
     const PRODUCTS = [
       // ===== Entertainment =====
       {
         id: "netflix",
-        name: "Netflix Premium",
+        name: "Netplix Premium",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -331,7 +336,7 @@
       },
       {
         id: "viu",
-        name: "Viu Premium",
+        name: "Viyu Premium",
         icon: "🎬",
         category: "entertainment",
         pricing: {
@@ -357,7 +362,7 @@
       },
       {
         id: "viva-max",
-        name: "VIVAMAX VIVAONE",
+        name: "VIVAMX VIVAONE",
         icon: "🎭",
         category: "entertainment",
         pricing: {
@@ -375,7 +380,7 @@
       },
       {
         id: "wetv",
-        name: "WeTV",
+        name: "WeTiv Premium",
         icon: "📱",
         category: "entertainment",
         pricing: {
@@ -391,7 +396,7 @@
       },
       {
         id: "iwant-tfc",
-        name: "IWANT TFC",
+        name: "iWant TFCx",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -407,7 +412,7 @@
       },
       {
         id: "crunchyroll",
-        name: "Crunchyroll",
+        name: "Crunchyrol",
         icon: "🎮",
         category: "entertainment",
         pricing: {
@@ -427,7 +432,7 @@
       },
       {
         id: "disney-plus",
-        name: "Disney+",
+        name: "Disny+",
         icon: "🦁",
         category: "entertainment",
         pricing: {
@@ -452,7 +457,7 @@
       },
       {
         id: "bilibili",
-        name: "Bilibili",
+        name: "BiliBili",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -465,7 +470,7 @@
       },
       {
         id: "loklok",
-        name: "Loklok",
+        name: "LokLokz",
         icon: "📱",
         category: "entertainment",
         pricing: {
@@ -481,7 +486,7 @@
       },
       {
         id: "iqiyi",
-        name: "iQiyi",
+        name: "iQiyix",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -494,7 +499,7 @@
       },
       {
         id: "hbo-max",
-        name: "HBO Max",
+        name: "HBO-MAXX",
         icon: "📹",
         category: "entertainment",
         pricing: {
@@ -517,7 +522,7 @@
       },
       {
         id: "amazon-prime",
-        name: "Amazon Prime",
+        name: "Amazn Prime",
         icon: "🛒",
         category: "entertainment",
         pricing: {
@@ -549,7 +554,7 @@
       },
       {
         id: "youku",
-        name: "Youku",
+        name: "YouKuX",
         icon: "📺",
         category: "entertainment",
         pricing: {
@@ -565,7 +570,7 @@
       },
       {
         id: "nba-league-pass",
-        name: "NBA League Pass Premium",
+        name: "NBA Pass Premium",
         icon: "🏀",
         category: "entertainment",
         pricing: {
@@ -581,7 +586,7 @@
       // ===== Streaming (Music) =====
       {
         id: "youtube",
-        name: "YouTube Premium",
+        name: "YouTube Premiumz",
         icon: "📹",
         category: "streaming",
         pricing: {
@@ -613,7 +618,7 @@
       },
       {
         id: "spotify",
-        name: "Spotify Premium",
+        name: "Spotfy Premium",
         icon: "🎵",
         category: "streaming",
         pricing: {
@@ -633,7 +638,7 @@
       },
       {
         id: "apple-music",
-        name: "Apple Music",
+        name: "AppleMusic",
         icon: "🎧",
         category: "streaming",
         pricing: {
@@ -649,7 +654,7 @@
       // ===== AI Tools =====
       {
         id: "chatgpt-plus",
-        name: "ChatGPT Plus",
+        name: "ChatGP-T Plus",
         icon: "🧠",
         category: "ai",
         pricing: {
@@ -667,7 +672,7 @@
       },
       {
         id: "chatgpt-go",
-        name: "ChatGPT Go",
+        name: "ChatGP-TO Go",
         icon: "🤖",
         category: "ai",
         pricing: {
@@ -683,7 +688,7 @@
       },
       {
         id: "blackbox-ai",
-        name: "Blackbox AI",
+        name: "Blackbx AI",
         icon: "🤖",
         category: "ai",
         pricing: {
@@ -696,7 +701,7 @@
       },
       {
         id: "perplexity",
-        name: "Perplexity AI",
+        name: "Perplexiti AI",
         icon: "🔍",
         category: "ai",
         pricing: {
@@ -718,7 +723,7 @@
       },
       {
         id: "google-one",
-        name: "Google One + Gemini AI",
+        name: "Google One + Gemini",
         icon: "☁️",
         category: "ai",
         pricing: {
@@ -807,7 +812,7 @@
       },
       {
         id: "turnitin-student",
-        name: "Turnitin Student",
+        name: "Turnitn Student",
         icon: "📝",
         category: "educational",
         pricing: {
@@ -824,7 +829,7 @@
       },
       {
         id: "turnitin-instructor",
-        name: "Turnitin Instructor",
+        name: "Turnitn Instructor",
         icon: "👨‍🏫",
         category: "educational",
         pricing: {
@@ -840,7 +845,7 @@
       },
       {
         id: "grammarly",
-        name: "Grammarly Premium",
+        name: "Gramrly Premium",
         icon: "✍️",
         category: "educational",
         pricing: {
@@ -856,7 +861,7 @@
       },
       {
         id: "quillbot",
-        name: "Quillbot Premium",
+        name: "Quillbt Premium",
         icon: "📝",
         category: "educational",
         pricing: {
@@ -872,7 +877,7 @@
       },
       {
         id: "ms-365",
-        name: "Microsoft 365",
+        name: "MS 365",
         icon: "💻",
         category: "educational",
         pricing: {
@@ -932,7 +937,7 @@
       },
       {
         id: "picsart",
-        name: "Picsart Gold",
+        name: "PicsArt Gold",
         icon: "👏",
         category: "editing",
         pricing: {
@@ -974,7 +979,7 @@
       },
       {
         id: "alight-motion",
-        name: "Alight Motion Pro",
+        name: "AlightMotion Pro",
         icon: "📱",
         category: "editing",
         pricing: {
@@ -1236,6 +1241,5 @@
 
     // Initial render
     renderCatalog();
-  </script>
-</body>
+  </script></body>
 </html>
