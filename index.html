@@ -2,7 +2,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Aiaxcart Premium – Catalog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
     :root {
       --primary: #ffb0b5;
       --secondary: #ffd3d6;
@@ -138,6 +139,7 @@
       cursor: pointer;
       transition: 0.18s ease;
       font-size: 0.8rem;
+      position: relative; /* for sale badge */
     }
 
     .card:hover {
@@ -159,6 +161,19 @@
       margin-top: 3px;
       font-size: 0.7rem;
       color: #9a7f7a;
+    }
+
+    .sale-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #ffebf0;
+      color: #c2185b;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
     .no-results {
@@ -245,11 +260,43 @@
 
     .price-line span.duration {
       font-weight: 500;
+      margin-right: 4px;
     }
 
     .price-line span.amount {
       font-weight: 600;
       color: #d4486e;
+    }
+
+    /* SALE styling */
+    .price-line-sale {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: baseline;
+      font-size: 0.84rem;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      opacity: 0.6;
+      margin-right: 4px;
+    }
+
+    .amount-new {
+      font-weight: 700;
+      color: #c2185b;
+      margin-right: 4px;
+    }
+
+    .sale-pill {
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #ffe0eb;
+      color: #b0003a;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
     @media (max-width: 600px) {
@@ -260,50 +307,56 @@
         padding: 16px;
       }
     }
-  </style></head>
+  </style>
+</head>
 <body>
   <div class="page-container">
     <h1>🛒 Aiaxcart Premium – Catalog</h1>
     <div class="subtitle">
       FAST PROCESS. PAYMENT THEN ACCOUNT.<br>
       MOP: GCASH / MAYA / MARIBANK
-    </div><div class="note-box">
-  <strong> REMINDER:</strong> Huwag i-comment ang <em>tamang spelling</em> para maiwasan ang automatic filtering ng inyong mga comment. 
-</div>
+    </div>
 
-<div class="note-box" style="background:#f0f9ff;border-color:#d0e9ff;color:#134e6f; text-align: left;">
-  <strong> DM FOR ORDERS </strong><br>
-  Facebook page: <strong> aiaxcart </strong><br>
-  Facebook account: <strong> Shanaia Maureen </strong><br>
-  Instagram: <strong> @shanmau_</strong><br>
-  Telegram: <strong> @shanmau</strong><br>
-  TikTok: <strong> Direct message (DM) </strong>
-  <div style="margin-top:6px;font-size:0.87rem;color:#254b57"> minutes to process after payment.</div>
-</div>
+    <div class="note-box">
+      <strong> REMINDER:</strong> Huwag i-comment ang <em>tamang spelling</em> para maiwasan ang automatic filtering ng inyong mga comment. 
+    </div>
 
-<div class="top-controls">
-  <div class="search-wrap">
-    <input
-      type="text"
-      id="searchInput"
-      class="search-input"
-      placeholder="Search product name…"
-    />
+    <div class="note-box" style="background:#f0f9ff;border-color:#d0e9ff;color:#134e6f; text-align: left;">
+      <strong> DM FOR ORDERS </strong><br>
+      Facebook page: <strong> aiaxcart </strong><br>
+      Facebook account: <strong> Shanaia Maureen </strong><br>
+      Instagram: <strong> @shanmau_</strong><br>
+      Telegram: <strong> @shanmau</strong><br>
+      TikTok: <strong> Direct message (DM) </strong>
+      <div style="margin-top:6px;font-size:0.87rem;color:#254b57"> minutes to process after payment.</div>
+    </div>
+
+    <div class="top-controls">
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search product name…"
+        />
+      </div>
+
+      <div class="category-filter">
+        <button class="cat-btn active" data-category="all">All</button>
+        <button class="cat-btn" data-category="sale">SALE / Promo</button>
+        <button class="cat-btn" data-category="entertainment">Entertainment</button>
+        <button class="cat-btn" data-category="streaming">Streaming</button>
+        <button class="cat-btn" data-category="ai">AI</button>
+        <button class="cat-btn" data-category="educational">Educational</button>
+        <button class="cat-btn" data-category="editing">Editing</button>
+      </div>
+    </div>
+
+    <div id="catalogRoot"></div>
   </div>
 
-  <div class="category-filter">
-    <button class="cat-btn active" data-category="all">All</button>
-    <button class="cat-btn" data-category="entertainment">Entertainment</button>
-    <button class="cat-btn" data-category="streaming">Streaming</button>
-    <button class="cat-btn" data-category="ai">AI</button>
-    <button class="cat-btn" data-category="educational">Educational</button>
-    <button class="cat-btn" data-category="editing">Editing</button>
-  </div>
-</div>
-
-<div id="catalogRoot"></div>
-
-  </div>  <!-- Modal -->  <div id="modalOverlay" class="modal-overlay">
+  <!-- Modal -->
+  <div id="modalOverlay" class="modal-overlay">
     <div class="modal-card">
       <button class="modal-close" id="modalCloseBtn">&times;</button>
       <div class="modal-header">
@@ -315,7 +368,9 @@
       <div class="modal-category" id="modalCategory"></div>
       <div id="modalBody"></div>
     </div>
-  </div>  <script>
+  </div>
+
+  <script>
     // ========= DATA: ALL PRODUCTS + PRICING (OBFUSCATED NAMES) =========
     const PRODUCTS = [
       // ===== Entertainment =====
@@ -696,6 +751,15 @@
             "1 month": 120,
             "2 months": 200,
             "3 months": 290
+          }
+        },
+        // SALE / Promo prices
+        sale: {
+          "Solo Account": {
+            "1 month": 450
+          },
+          "Shared Account": {
+            "1 month": 80
           }
         }
       },
@@ -1113,7 +1177,14 @@
     function renderCatalog() {
       const query = (searchInput.value || "").toLowerCase().trim();
       const filtered = PRODUCTS.filter(p => {
-        const matchCategory = activeCategory === "all" || p.category === activeCategory;
+        let matchCategory;
+        if (activeCategory === "all") {
+          matchCategory = true;
+        } else if (activeCategory === "sale") {
+          matchCategory = !!p.sale;
+        } else {
+          matchCategory = p.category === activeCategory;
+        }
         const matchSearch = !query || p.name.toLowerCase().includes(query);
         return matchCategory && matchSearch;
       });
@@ -1172,11 +1243,18 @@
 
           const tagDiv = document.createElement("div");
           tagDiv.className = "card-tag";
-          tagDiv.textContent = "View pricing";
+          tagDiv.textContent = prod.sale ? "View promo pricing" : "View pricing";
 
           card.appendChild(iconDiv);
           card.appendChild(nameDiv);
           card.appendChild(tagDiv);
+
+          if (prod.sale) {
+            const badge = document.createElement("div");
+            badge.className = "sale-badge";
+            badge.textContent = "SALE";
+            card.appendChild(badge);
+          }
 
           card.addEventListener("click", () => openModalForProduct(prod));
 
@@ -1194,6 +1272,12 @@
     const modalCategory = document.getElementById("modalCategory");
     const modalBody = document.getElementById("modalBody");
     const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+    function getSalePrice(prod, typeName, durationText) {
+      if (!prod.sale || !prod.sale[typeName]) return null;
+      const val = prod.sale[typeName][durationText];
+      return typeof val === "number" ? val : null;
+    }
 
     function openModalForProduct(prod) {
       modalIcon.textContent = prod.icon || "📦";
@@ -1230,11 +1314,22 @@
           const entries = pricing[typeName];
           Object.keys(entries).forEach(durationText => {
             const line = document.createElement("div");
-            line.className = "price-line";
-            const amount = entries[durationText];
-            line.innerHTML =
-              `<span class="duration">${durationText}</span> – ` +
-              `<span class="amount">${formatPrice(amount)}</span>`;
+            const baseAmount = entries[durationText];
+            const saleAmount = getSalePrice(prod, typeName, durationText);
+
+            if (saleAmount != null) {
+              line.className = "price-line-sale";
+              line.innerHTML =
+                `<span class="duration">${durationText}</span> – ` +
+                `<span class="old-price">${formatPrice(baseAmount)}</span>` +
+                `<span class="amount-new">${formatPrice(saleAmount)}</span>` +
+                `<span class="sale-pill">SALE</span>`;
+            } else {
+              line.className = "price-line";
+              line.innerHTML =
+                `<span class="duration">${durationText}</span> – ` +
+                `<span class="amount">${formatPrice(baseAmount)}</span>`;
+            }
             block.appendChild(line);
           });
 
@@ -1270,5 +1365,6 @@
 
     // Initial render
     renderCatalog();
-  </script></body>
+  </script>
+</body>
 </html>
