@@ -139,7 +139,7 @@
       cursor: pointer;
       transition: 0.18s ease;
       font-size: 0.8rem;
-      position: relative; /* for sale badge */
+      position: relative;
     }
 
     .card:hover {
@@ -349,6 +349,8 @@
         <button class="cat-btn" data-category="ai">AI</button>
         <button class="cat-btn" data-category="educational">Educational</button>
         <button class="cat-btn" data-category="editing">Editing</button>
+        <button class="cat-btn" data-category="boosting">Boosting</button>
+        <button class="cat-btn" data-category="ios">iOS Paid Apps</button>
       </div>
     </div>
 
@@ -371,7 +373,7 @@
   </div>
 
   <script>
-    // ========= DATA: ALL PRODUCTS + PRICING (OBFUSCATED NAMES) =========
+    // ========= DATA: ALL PRODUCTS + PRICING =========
     const PRODUCTS = [
       // ===== Entertainment =====
       {
@@ -732,6 +734,11 @@
             "3 months": 129,
             "4 months": 159
           }
+        },
+        sale: {
+          "Solo Account": {
+            "3 months": 100
+          }
         }
       },
 
@@ -753,13 +760,16 @@
             "3 months": 290
           }
         },
-        // SALE / Promo prices
         sale: {
           "Solo Account": {
-            "1 month": 450
+            "1 month": 450,
+            "2 months": 700,
+            "3 months": 900
           },
           "Shared Account": {
-            "1 month": 80
+            "1 month": 80,
+            "2 months": 150,
+            "3 months": 200
           }
         }
       },
@@ -776,6 +786,16 @@
           "Solo Account": {
             "1 month": 230,
             "1 year": 750
+          }
+        },
+        sale: {
+          "Shared Account": {
+            "1 month": 50,
+            "1 year": 200
+          },
+          "Solo Account": {
+            "1 month": 200,
+            "1 year": 400
           }
         }
       },
@@ -1068,6 +1088,11 @@
             "2 months": 120,
             "3 months": 155
           }
+        },
+        sale: {
+          "Solo Account": {
+            "7 days": 35
+          }
         }
       },
       {
@@ -1118,6 +1143,14 @@
             "2 months": 90,
             "3 months": 120
           }
+        },
+        sale: {
+          "Solo Account": {
+            "1 month": 70
+          },
+          "Shared Account": {
+            "1 month": 35
+          }
         }
       },
       {
@@ -1149,6 +1182,162 @@
             "1 month": 70,
             "2 months": 120,
             "3 months": 160
+          }
+        }
+      },
+
+      // ===== Boosting Services =====
+      {
+        id: "boost-insta",
+        name: "Boosting – Instagram",
+        icon: "📸",
+        category: "boosting",
+        pricing: {
+          "Views / Shares": {
+            "100": 20,
+            "500": 50,
+            "1,000": 70,
+            "10,000": 100
+          },
+          "Post / Reels Likes": {
+            "100": 20,
+            "500": 75,
+            "1,000": 125,
+            "5,000": 155,
+            "10,000": 200
+          },
+          "Followers": {
+            "100": 25,
+            "500": 90,
+            "1,000": 150,
+            "5,000": 350,
+            "10,000": 550
+          }
+        }
+      },
+      {
+        id: "boost-facebook",
+        name: "Boosting – Facebook",
+        icon: "📘",
+        category: "boosting",
+        pricing: {
+          "Profile/Page Followers (MB)": {
+            "100": 25,
+            "500": 100,
+            "1,000": 160
+          },
+          "Profile/Page Followers (PHB)": {
+            "100": 50,
+            "500": 210,
+            "1,000": 380
+          },
+          "Page Likes + Followers (MB)": {
+            "100": 35,
+            "500": 115,
+            "1,000": 175
+          },
+          "Page Likes + Followers (PHB)": {
+            "100": 60,
+            "500": 250,
+            "1,000": 430
+          },
+          "Post Reacts (MB)": {
+            "100": 20,
+            "500": 70,
+            "1,000": 100
+          },
+          "Post Reacts (PHB)": {
+            "100": 50,
+            "500": 210,
+            "1,000": 380
+          },
+          "Post / Reels Views": {
+            "1,000": 30,
+            "5,000": 110,
+            "10,000": 190
+          },
+          "Post Shares": {
+            "100": 20,
+            "500": 60,
+            "1,000": 90
+          },
+          "Comments (Customized) MB": {
+            "50": 100,
+            "100": 150,
+            "500": 550
+          },
+          "Comments (Customized) PHB": {
+            "50": 150,
+            "100": 280,
+            "500": 1300
+          },
+          "Group Members": {
+            "100": 20,
+            "500": 70,
+            "1,000": 100
+          }
+        }
+      },
+      {
+        id: "boost-tiktok",
+        name: "Boosting – TikTok",
+        icon: "🎵",
+        category: "boosting",
+        pricing: {
+          "Followers": {
+            "100": 35,
+            "500": 150,
+            "1,000": 220,
+            "5,000": 700,
+            "10,000": 1200
+          },
+          "Likes": {
+            "100": 20,
+            "500": 70,
+            "1,000": 110,
+            "5,000": 155,
+            "10,000": 200
+          },
+          "Views": {
+            "100": 10,
+            "500": 40,
+            "1,000": 60,
+            "5,000": 80,
+            "10,000": 100
+          },
+          "Live Likes": {
+            "100": 15,
+            "500": 45,
+            "1,000": 65,
+            "5,000": 90,
+            "10,000": 110
+          },
+          "Shares / Save": {
+            "100": 10,
+            "500": 40,
+            "1,000": 60,
+            "5,000": 80,
+            "10,000": 100
+          }
+        }
+      },
+
+      // ===== iOS Paid Apps =====
+      {
+        id: "ios-paid-apps",
+        name: "iOS Paid Apps",
+        icon: "🍎",
+        category: "ios",
+        pricing: {
+          "Lifetime (1 device only)": {
+            "Dazz Cam": 99,
+            "Procreate iPad": 120,
+            "AnkiMobile": 150
+          },
+          "With 1yr warranty (1 device)": {
+            "Goodnotes 6": 160,
+            "Kilonotes": 150,
+            "Penly": 150
           }
         }
       }
@@ -1197,7 +1386,9 @@
         streaming: "Streaming",
         ai: "AI Tools",
         educational: "Educational",
-        editing: "Editing Tools"
+        editing: "Editing Tools",
+        boosting: "Boosting Services",
+        ios: "iOS Paid Apps"
       };
 
       const catIcons = {
@@ -1205,7 +1396,9 @@
         streaming: "🎵",
         ai: "🤖",
         educational: "📚",
-        editing: "🎨"
+        editing: "🎨",
+        boosting: "📈",
+        ios: "🍎"
       };
 
       if (!filtered.length) {
@@ -1288,7 +1481,9 @@
         streaming: "Streaming",
         ai: "AI Tool",
         educational: "Educational",
-        editing: "Editing Tool"
+        editing: "Editing Tool",
+        boosting: "Boosting Service",
+        ios: "iOS Paid Apps"
       };
       modalCategory.textContent = catNames[prod.category] || "";
 
